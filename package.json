@@ -1,33 +1,31 @@
 {
-  "name": "bashgenie",
-  "version": "0.0.1",
-  "description": "CLI tool that translates your question to a shell command",
-  "files": [
-    "dist"
-  ],
-  "main": "dist/index.js",
-  "type": "module",
-  "bin": {
-    "bashgenie": "dist/index.js"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "ci": "npm run build && npm run format:check",
-    "format:fix": "npm run format:check -- --write .",
-    "format:check": "prettier --check ."
-  },
-  "author": "Alessio Scarfone",
-  "license": "MIT",
-  "dependencies": {
-    "ai": "^4.1.54",
-    "conf": "^13.1.0"
-  },
-  "engines": {
-    "node": ">=22.0.0"
-  },
-  "devDependencies": {
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
-  }
+	"name": "bashgenie",
+	"version": "0.0.1",
+	"description": "CLI tool that translates your question to a shell command",
+	"files": ["dist"],
+	"main": "dist/index.js",
+	"type": "module",
+	"bin": {
+		"bashgenie": "dist/index.js"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc",
+		"ci": "npm run build && npm run format:check",
+		"check:write": "npm run check -- --write",
+		"check": "biome check"
+	},
+	"author": "Alessio Scarfone",
+	"license": "MIT",
+	"dependencies": {
+		"ai": "^4.1.54",
+		"conf": "^13.1.0"
+	},
+	"engines": {
+		"node": ">=22.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"typescript": "^5.8.2"
+	}
 }

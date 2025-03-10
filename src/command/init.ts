@@ -37,7 +37,7 @@ export async function init() {
 	outro(kleur.bgBlue('Configure BashGenie: Completed'));
 }
 
-function isConfAlreadyExist(conf: Conf<AnyMxRecord>) {
+function isConfAlreadyExist(conf: Conf<any>) {
 	return conf?.size > 0;
 }
 

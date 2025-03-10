@@ -1,11 +1,12 @@
 #! /usr/bin/env node
 
+import { init } from './command/init.js';
 import { parseCmdArgs } from './parteCmdArgs.js';
 
-console.log('BashGenie');
+const { values, positionals } = parseCmdArgs(process.argv.splice(2));
 
-console.log(process.argv);
+console.debug('parse args:', { values, positionals });
 
-const { values, positionals } = parseCmdArgs(process.argv);
-
-console.log({ values, positionals });
+if (values.init) {
+	init();
+}

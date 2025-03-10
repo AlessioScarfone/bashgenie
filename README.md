@@ -17,3 +17,4 @@
 
 - https://hackernoon.com/publishing-a-nodejs-cli-tool-to-npm-in-less-than-15-minutes
 - https://www.totaltypescript.com/how-to-create-an-npm-package
+- https://blog.logrocket.com/building-typescript-cli-node-js-commander/#making-cli-globally-accessible

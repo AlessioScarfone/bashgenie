@@ -1,4 +1,6 @@
 {
+	"include": ["src/*.ts"],
+	// "exclude": ["src/*.test.*"],
 	"compilerOptions": {
 		/* Base Options: */
 		"esModuleInterop": true,
@@ -9,12 +11,10 @@
 		"moduleDetection": "force",
 		"isolatedModules": true,
 		"verbatimModuleSyntax": true,
-
 		/* Strictness */
 		"strict": true,
 		"noUncheckedIndexedAccess": true,
 		"noImplicitOverride": true,
-
 		/* If transpiling with TypeScript: */
 		"module": "NodeNext",
 		"outDir": "dist",

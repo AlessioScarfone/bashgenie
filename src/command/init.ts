@@ -21,6 +21,9 @@ const confSchema = {
 
 /**
  * Initialise process. Select model and set API_KEY value
+ *
+ * The configuration file is placed in the user's configuration directory:
+ * https://github.com/sindresorhus/env-paths#pathsconfig
  */
 export async function init() {
 	//encryptionKey: this is not intended for security purposes, it's main use is for obscurity
@@ -53,7 +56,7 @@ function isConfAlreadyExist(conf: Conf<any>) {
 async function overwriteCheck() {
 	const overwrite = await confirm({
 		message: 'Config already exist. Do you want to overwrite?',
-		initialValue: false
+		initialValue: false,
 	});
 	checkIsCancel(overwrite);
 	return overwrite;

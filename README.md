@@ -1,15 +1,10 @@
 # BashGenie
 
-# Tech
-
-- [ ] conf per salvare la configurazione
-- [ ] parsing arg utilizzando node:util parseArg
-- [ ] file che specifica la versione minima di node da usare
-
 # Feature:
 
+- [X] Comando per la configurazione iniziale
 - [ ] ottieni il comando partendo dalla frase
-- [ ] esegui automaticamente il comonda (chiedi conferma prima)
+- [ ] esegui automaticamente il comando (chiedi conferma prima)
 - [ ] funzione "spiega", che spiega il comando generato
 - [ ] flag "verboso" per otterenere tutti i dettagli della generazione (numero di token usati)
 

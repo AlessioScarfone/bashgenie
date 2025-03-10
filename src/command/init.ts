@@ -7,17 +7,9 @@ import {
 	select,
 	text,
 } from '@clack/prompts';
-import Conf from 'conf';
+import type Conf from 'conf';
 import kleur from 'kleur';
-
-const confSchema = {
-	model: {
-		type: 'string',
-	},
-	apikey: {
-		type: 'string',
-	},
-};
+import { conf, type providersType } from '../configuration.js';
 
 /**
  * Initialise process. Select model and set API_KEY value
@@ -27,12 +19,6 @@ const confSchema = {
  */
 export async function init() {
 	//encryptionKey: this is not intended for security purposes, it's main use is for obscurity
-	const conf = new Conf({
-		projectName: 'BashGenie',
-		schema: confSchema,
-		encryptionKey: '3ncr1pt10nk3y',
-	});
-
 	intro(kleur.bgBlue('Configure BashGenie: Start'));
 	if (isConfAlreadyExist(conf)) {
 		const confirmOverwrite = await overwriteCheck();
@@ -41,11 +27,12 @@ export async function init() {
 		}
 	}
 	const apikey = await askAPIKey();
-	const model = await selectModel();
+	const { model, provider } = await selectModel();
 
 	// console.log('conf:', { path: conf.path, store: conf.store })
 	conf.set('apikey', apikey);
 	conf.set('model', model);
+	conf.set('provider', provider);
 	outro(kleur.bgBlue('Configure BashGenie: Completed'));
 }
 
@@ -87,7 +74,7 @@ async function selectModel() {
 	checkIsCancel(provider);
 
 	const options =
-		modelList[provider]?.map((el) => ({
+		modelList[provider as providersType]?.map((el) => ({
 			value: el,
 			label: el,
 		})) || [];
@@ -108,10 +95,10 @@ async function selectModel() {
 		checkIsCancel(model);
 	}
 
-	return model;
+	return { provider, model };
 }
 
-const modelList: { [key: string]: string[] } = {
+const modelList: { [key in providersType]: string[] } = {
 	google: [
 		'gemini-2.0-flash-001',
 		'gemini-1.5-flash',

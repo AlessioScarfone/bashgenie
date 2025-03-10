@@ -24,20 +24,13 @@ const options: { [key in optionsKeyType]: Options } = {
 		type: 'boolean',
 		default: false,
 		short: 'e',
+		multiple: false,
 	},
 	help: {
 		type: 'boolean',
 		default: false,
 		short: 'h',
 	},
-};
-
-//TODO: add help description
-const helpDescription: { [key in optionsKeyType]: string } = {
-	init: '',
-	explain: '',
-	help: '',
-	verbose: '',
 };
 
 export function parseCmdArgs(args: string[]) {

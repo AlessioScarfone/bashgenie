@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
-import { parseCmdArgs } from './parteCmdArgs.js';
+import { parseCmdArgs } from './parse-cmd-args.js';
 
-test('init check', () => {
+test('parseCmdArgs', () => {
 	const args = ['--init', 'test', 'word'];
 	const { values, positionals } = parseCmdArgs(args);
 	console.log(values.init);

@@ -1,12 +1,13 @@
-# BashGenie
+# bashgenie
 
 # Feature:
 
 - [X] Comando per la configurazione iniziale
-- [ ] ottieni il comando partendo dalla frase
+- [X] ottieni il comando partendo dalla frase
 - [ ] esegui automaticamente il comando (chiedi conferma prima)
-- [ ] funzione "spiega", che spiega il comando generato
-- [ ] flag "verboso" per otterenere tutti i dettagli della generazione (numero di token usati)
+- [X] funzione "spiega", che spiega il comando generato
+- [X] flag "verboso" per otterenere tutti i dettagli della generazione (numero di token usati)
+- [X] Help command
 
 # Resources
 

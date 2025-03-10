@@ -36,7 +36,7 @@ export async function init() {
 	outro(kleur.bgBlue('Configure BashGenie: Completed'));
 }
 
-function isConfAlreadyExist(conf: Conf<any>) {
+function isConfAlreadyExist(conf: Conf) {
 	return conf?.size > 0;
 }
 
@@ -54,7 +54,7 @@ async function askAPIKey() {
 		message: 'APIKEY ?',
 		placeholder: 'xkiac.....',
 		validate(value) {
-			if (!value?.trim()?.length) return `Value is required!`;
+			if (!value?.trim()?.length) return 'Value is required!';
 		},
 	});
 
@@ -89,7 +89,7 @@ async function selectModel() {
 		model = (await text({
 			message: 'Specify a model?',
 			validate(value) {
-				if (!value?.trim()?.length) return `Value is required!`;
+				if (!value?.trim()?.length) return 'Value is required!';
 			},
 		})) as string;
 		checkIsCancel(model);

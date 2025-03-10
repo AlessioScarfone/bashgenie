@@ -28,5 +28,3 @@ export function buildSystemPrompt(shell = 'bash', os = 'MacOS') {
     `;
 	return systemPrompt;
 }
-
-``;

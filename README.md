@@ -38,7 +38,8 @@ Do not ask to run the generate command and exit after printing the generation re
 - [X] `explain` command
 - [X] `verbose` command (used token)
 - [X] `help` command
-- [X] exec command (ask user confirmation)
+- [X] `exec` command (ask user confirmation)
+- [ ] use `spawn` to run command and stream the output
 
 # Resources
 

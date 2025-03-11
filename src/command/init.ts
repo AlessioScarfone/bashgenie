@@ -10,7 +10,6 @@ import {
 import type Conf from 'conf';
 import kleur from 'kleur';
 import { conf, type providersType } from '../configuration.js';
-import type { AnyMxRecord } from 'dns';
 
 /**
  * Initialise process. Select model and set API_KEY value

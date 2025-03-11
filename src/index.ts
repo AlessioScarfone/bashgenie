@@ -52,6 +52,7 @@ if (values.exec) {
 	}
 	outro(bgBlue('BashGenie: Completed. Command launched. (Good luck)'));
 
+	// TODO: Replace with spawn and streaming the output
 	try {
 		const result = await asyncExec(`${object.command}`);
 		console.log(`${result.stdout}`);

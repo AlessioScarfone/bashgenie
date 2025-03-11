@@ -27,6 +27,9 @@ Show additional information, such as token usage, to help understand the interna
 `--init`
 Run the configuration wizard to set up the tool. Useful for first-time users or when you want to adjust settings.
 
+`--no-exec`
+Do not ask to run the generate command and exit after printing the generation result
+
 
 # Feature
 
@@ -35,7 +38,7 @@ Run the configuration wizard to set up the tool. Useful for first-time users or 
 - [X] `explain` command
 - [X] `verbose` command (used token)
 - [X] `help` command
-- [ ] exec command (ask user confirmation)
+- [X] exec command (ask user confirmation)
 
 # Resources
 

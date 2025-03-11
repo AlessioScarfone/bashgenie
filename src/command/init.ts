@@ -8,7 +8,7 @@ import {
 	text,
 } from '@clack/prompts';
 import type Conf from 'conf';
-import kleur from 'kleur';
+import { bgBlue } from 'kleur/colors';
 import { conf, type providersType } from '../configuration.js';
 
 /**
@@ -19,7 +19,7 @@ import { conf, type providersType } from '../configuration.js';
  */
 export async function init() {
 	//encryptionKey: this is not intended for security purposes, it's main use is for obscurity
-	intro(kleur.bgBlue('Configure BashGenie: Start'));
+	intro(bgBlue('Configure BashGenie: Start'));
 	if (isConfAlreadyExist(conf)) {
 		const confirmOverwrite = await overwriteCheck();
 		if (!confirmOverwrite) {
@@ -33,7 +33,7 @@ export async function init() {
 	conf.set('apikey', apikey);
 	conf.set('model', model);
 	conf.set('provider', provider);
-	outro(kleur.bgBlue('Configure BashGenie: Completed'));
+	outro(bgBlue('Configure BashGenie: Completed'));
 }
 
 function isConfAlreadyExist(conf: Conf<any>) {

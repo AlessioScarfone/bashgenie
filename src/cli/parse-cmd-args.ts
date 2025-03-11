@@ -7,7 +7,7 @@ type Options = {
 	default?: boolean | string;
 };
 
-type optionsKeyType = 'init' | 'verbose' | 'explain' | 'help';
+type optionsKeyType = 'init' | 'verbose' | 'explain' | 'help' | 'exec';
 
 const options: { [key in optionsKeyType]: Options } = {
 	init: {
@@ -31,8 +31,17 @@ const options: { [key in optionsKeyType]: Options } = {
 		default: false,
 		short: 'h',
 	},
+	exec: {
+		type: 'boolean',
+		default: true,
+	},
 };
 
 export function parseCmdArgs(args: string[]) {
-	return parseArgs({ args, options, allowPositionals: true });
+	return parseArgs({
+		args,
+		options,
+		allowPositionals: true,
+		allowNegative: true,
+	});
 }

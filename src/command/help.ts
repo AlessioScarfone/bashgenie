@@ -16,6 +16,9 @@ export function showHelp() {
 
     --init  
         Run the configuration wizard to set up the tool with your preferences. Useful for first-time users or when you want to adjust settings.
+    
+    --no-exec
+        Do not ask to run the generate command and exit after printing the generation result
 
     Example Usage:
     1. Basic command generation:

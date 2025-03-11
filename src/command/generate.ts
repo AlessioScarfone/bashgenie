@@ -36,7 +36,8 @@ const schema = z.object({
 		description: 'generated command to solve the user question',
 	}),
 	explaination: z.string({
-		description: 'explaination of the generated command',
+		description:
+			'explanation of the generated command. Explains the command and each flag used. If the command is a pipe of multiple commands, explain each of them.',
 	}),
 });
 

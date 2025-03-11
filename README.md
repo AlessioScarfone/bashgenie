@@ -1,13 +1,26 @@
-# bashgenie
+# BashGenie
 
-# Feature:
+A command-line tool that lets you ask in plain English how to do something and returns the exact command you need.
 
-- [X] Comando per la configurazione iniziale
-- [X] ottieni il comando partendo dalla frase
-- [ ] esegui automaticamente il comando (chiedi conferma prima)
-- [X] funzione "spiega", che spiega il comando generato
-- [X] flag "verboso" per otterenere tutti i dettagli della generazione (numero di token usati)
-- [X] Help command
+
+## Initial configuration
+```sh
+bashgenie --init
+```
+
+## Example
+
+work in progress...
+
+
+# Feature
+
+- [X] generate command from question
+- [X] `init` command
+- [X] `explain` command
+- [X] `verbose` command (used token)
+- [X] `help` command
+- [ ] exec command (ask user confirmation)
 
 # Resources
 

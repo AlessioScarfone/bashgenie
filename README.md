@@ -1,16 +1,31 @@
 # BashGenie
 
-A command-line tool that lets you ask in plain English how to do something and returns the exact command you need.
-
+BashGenie is a command-line tool that leverages AI to convert your natural language questions into precise CLI commands. Simply ask a question, and let the AI generate the appropriate command for you.
 
 ## Initial configuration
 ```sh
 bashgenie --init
 ```
 
-## Example
+## Usage
 
-work in progress...
+```bash
+bashgenie [OPTIONS] <YOUR QUESTION>
+```
+
+**Options**
+
+`-h, --help`
+Show this help message and exit.
+
+`-e, --explain`
+Explain the generated command. This will provide a detailed breakdown of the command components and why they were selected.
+
+`-v, --verbose`
+Show additional information, such as token usage, to help understand the internal workings of the tool.
+
+`--init`
+Run the configuration wizard to set up the tool. Useful for first-time users or when you want to adjust settings.
 
 
 # Feature

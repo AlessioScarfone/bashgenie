@@ -24,6 +24,9 @@ Explain the generated command. This will provide a detailed breakdown of the com
 `-v, --verbose`
 Show additional information, such as token usage, to help understand the internal workings of the tool.
 
+`-c, --show-conf`
+Show current configuration.
+
 `--init`
 Run the configuration wizard to set up the tool. Useful for first-time users or when you want to adjust settings.
 

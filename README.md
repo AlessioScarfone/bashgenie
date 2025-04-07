@@ -2,6 +2,8 @@
 
 BashGenie is a command-line tool that leverages AI to convert your natural language questions into precise CLI commands. Simply ask a question, and let the AI generate the appropriate command for you.
 
+![banner](./assets/banner.png)
+
 ## Initial configuration
 ```sh
 bashgenie --init

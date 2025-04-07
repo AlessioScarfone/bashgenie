@@ -22,13 +22,13 @@ if (values.help) {
 	process.exit();
 }
 
-if (values.init) {
-	await init();
-}
-
 if (values['show-conf']) {
 	showConf();
 	process.exit();
+}
+
+if (values.init) {
+	await init();
 }
 
 intro(bgBlue('BashGenie: Start'));

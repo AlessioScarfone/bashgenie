@@ -2,7 +2,7 @@ import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
 import { confirm, intro, isCancel, log, outro, spinner } from '@clack/prompts';
 import type { LanguageModelUsage } from 'ai';
-import { bgBlue, bgRed } from 'kleur/colors';
+import { bgBlue, bgRed, bgYellow } from 'kleur/colors';
 import { generateCommand } from '../ai/ai.js';
 
 export type RunOptions = {
@@ -12,6 +12,8 @@ export type RunOptions = {
 };
 
 const asyncExec = promisify(exec);
+
+const MAX_DANGER_LEVEL = 7;
 
 export async function run(question: string | string[], values: RunOptions) {
 	intro(bgBlue('Welcome to BashGenie'));
@@ -30,6 +32,12 @@ export async function run(question: string | string[], values: RunOptions) {
 	}
 
 	let toRun = false;
+
+	printDangerLevel(object.danger);
+	if (object.danger >= MAX_DANGER_LEVEL) {
+		values.exec = false;
+		log.error(bgRed('The generated command is dangerous'));
+	}
 
 	if (values.exec) {
 		const executeCommand = await confirm({
@@ -69,4 +77,9 @@ function printVerbose(usage: LanguageModelUsage) {
 			`\nCompletion Tokens = ${usage.completionTokens}` +
 			`\nTotal Tokens = ${usage.totalTokens}`,
 	);
+}
+
+function printDangerLevel(dangerLevel: number) {
+	const color = dangerLevel < 5 ? bgBlue : dangerLevel < 7 ? bgYellow : bgRed;
+	log.warn(`Danger level assessment: ${color(` ${dangerLevel} `)}`);
 }

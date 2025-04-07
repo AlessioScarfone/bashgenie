@@ -13,7 +13,7 @@
 		"test": "vitest run --coverage",
 		"build": "tsc",
 		"ci": "npm run build && npm run format:check",
-		"biome:fix": "npm run biome:check -- --write",
+		"biome:fix": "biome check --write",
 		"biome:check": "biome check"
 	},
 	"author": "Alessio Scarfone",

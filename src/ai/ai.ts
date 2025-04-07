@@ -42,7 +42,12 @@ const schema = z.object({
 	}),
 	explaination: z.string({
 		description:
-			'explanation of the generated command. Explains the command and each flag used. If the command is a pipe of multiple commands, explain each of them.',
+			'explanation of the generated command. Explains the command and each flag used. If the command is a pipe of multiple commands, explain each of them.' +
+			'If the command is dangerous, explain why',
+	}),
+	danger: z.number({
+		description:
+			'a rating of the dangerousness of the generated command from 1 to 10, where 1 is safe and 10 is extremely dangerous.',
 	}),
 });
 

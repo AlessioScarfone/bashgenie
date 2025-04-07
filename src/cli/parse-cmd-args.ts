@@ -7,7 +7,13 @@ type Options = {
 	default?: boolean | string;
 };
 
-type optionsKeyType = 'init' | 'verbose' | 'explain' | 'help' | 'exec';
+type optionsKeyType =
+	| 'init'
+	| 'verbose'
+	| 'explain'
+	| 'help'
+	| 'exec'
+	| 'show-conf';
 
 const options: { [key in optionsKeyType]: Options } = {
 	init: {
@@ -34,6 +40,11 @@ const options: { [key in optionsKeyType]: Options } = {
 	exec: {
 		type: 'boolean',
 		default: true,
+	},
+	'show-conf': {
+		type: 'boolean',
+		default: false,
+		short: 'c',
 	},
 };
 

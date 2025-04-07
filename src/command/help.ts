@@ -13,6 +13,9 @@ export function showHelp() {
 
     -v, --verbose  
         Show additional information, such as token usage, to help understand the internal workings of the tool.
+    
+    -c, --show-conf
+        Show current configuration. (API KEY is not showed)
 
     --init  
         Run the configuration wizard to set up the tool with your preferences. Useful for first-time users or when you want to adjust settings.

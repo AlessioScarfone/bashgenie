@@ -3,13 +3,20 @@ import {
 	confirm,
 	intro,
 	isCancel,
+	log,
 	outro,
 	select,
 	text,
 } from '@clack/prompts';
-import type Conf from 'conf';
 import { bgBlue } from 'kleur/colors';
-import { conf, type providersType } from '../configuration.js';
+import {
+	conf,
+	getAIProvider,
+	getApiKey,
+	getModel,
+	isConfAlreadyExist,
+	type providersType,
+} from '../configuration.js';
 
 /**
  * Initialise process. Select model and set API_KEY value
@@ -20,36 +27,51 @@ import { conf, type providersType } from '../configuration.js';
 export async function init() {
 	//encryptionKey: this is not intended for security purposes, it's main use is for obscurity
 	intro(bgBlue('Configure BashGenie: Start'));
-	if (isConfAlreadyExist(conf)) {
-		const confirmOverwrite = await overwriteCheck();
-		if (!confirmOverwrite) {
-			process.exit();
-		}
+	if (isConfAlreadyExist()) {
+		await askForOwerwrite(
+			'Config already exist. Do you want to overwrite?',
+			async (o) => {
+				if (!o) process.exit();
+			},
+		);
 	}
-	const apikey = await askAPIKey();
-	const { model, provider } = await selectModel();
 
+	const apikey = await askAPIKey();
 	// console.log('conf:', { path: conf.path, store: conf.store })
-	conf.set('apikey', apikey);
+	if (apikey == null) {
+		log.step('API key already exist. Do not overwrite!');
+	} else {
+		conf.set('apikey', apikey);
+	}
+
+	const { model, provider } = await selectModel();
 	conf.set('model', model);
 	conf.set('provider', provider);
 	outro(bgBlue('Configure BashGenie: Completed'));
 }
 
-function isConfAlreadyExist(conf: Conf<any>) {
-	return conf?.size > 0;
-}
-
-async function overwriteCheck() {
+async function askForOwerwrite(
+	message: string,
+	cb: (overwrite: boolean) => Promise<boolean | void> = (o: boolean) =>
+		Promise.resolve(o),
+	initialValue = false,
+) {
 	const overwrite = await confirm({
-		message: 'Config already exist. Do you want to overwrite?',
-		initialValue: false,
+		message,
+		initialValue,
 	});
-	checkIsCancel(overwrite);
-	return overwrite;
+	closeOnCancel(overwrite);
+	return await cb(overwrite as boolean);
 }
 
 async function askAPIKey() {
+	if (getApiKey()) {
+		const v = await askForOwerwrite(
+			'API key already exist. Do you want to overwrite?',
+		);
+		if (!v) return null;
+	}
+
 	const apikey = await text({
 		message: 'APIKEY ?',
 		placeholder: 'xkiac.....',
@@ -58,41 +80,57 @@ async function askAPIKey() {
 		},
 	});
 
-	checkIsCancel(apikey);
+	closeOnCancel(apikey);
 	return apikey;
 }
 
 async function selectModel() {
+	if (getAIProvider() && getModel()) {
+		log.info(
+			`${bgBlue('Current Model')} -> ${getAIProvider().toUpperCase()} : ${getModel()}`,
+		);
+	}
+
+	const selectProviderOptions: Array<{ value: providersType; label: string }> =
+		[
+			{ value: 'google', label: 'Google Generative AI' },
+			{ value: 'openai', label: 'OpenAI' },
+			{ value: 'anthropic', label: 'Anthropic' },
+		];
+
 	const provider = (await select({
 		message: 'Choose you AI provider',
-		options: [
-			{ value: 'google', label: 'Google Generative AI' },
-			{ value: 'openAI', label: 'OpenAI' },
-		],
+		options: selectProviderOptions,
 	})) as string;
 
-	checkIsCancel(provider);
+	closeOnCancel(provider);
 
-	const options =
+	const selectModelOptions =
 		modelList[provider as providersType]?.map((el) => ({
 			value: el,
 			label: el,
 		})) || [];
 
-	options.unshift(manualOption);
+	selectModelOptions.unshift({
+		value: 'manual',
+		label: 'Insert manually',
+	});
 
-	let model = (await select({ message: 'Choose model', options })) as string;
+	let model = (await select({
+		message: 'Choose model',
+		options: selectModelOptions,
+	})) as string;
 
-	checkIsCancel(model);
+	closeOnCancel(model);
 
-	if (model === INSERT_MANUAL_OPTION_VALUE) {
+	if (model === 'manual') {
 		model = (await text({
 			message: 'Specify a model?',
 			validate(value) {
 				if (!value?.trim()?.length) return 'Value is required!';
 			},
 		})) as string;
-		checkIsCancel(model);
+		closeOnCancel(model);
 	}
 
 	return { provider, model };
@@ -112,14 +150,16 @@ const modelList: { [key in providersType]: string[] } = {
 		'gemini-1.5-pro-latest',
 		'gemini-1.5-pro-001',
 		'gemini-1.5-pro-002',
+		'gemini-2.5-pro-exp-03-25',
 		'gemini-2.0-flash-lite-preview-02-05',
 		'gemini-2.0-pro-exp-02-05',
 		'gemini-2.0-flash-thinking-exp-01-21',
 		'gemini-2.0-flash-exp',
 		'gemini-exp-1206',
+		'gemma-3-27b-it',
 		'learnlm-1.5-pro-experimental',
 	],
-	openAI: [
+	openai: [
 		'o1',
 		'o1-2024-12-17',
 		'o1-mini',
@@ -149,20 +189,25 @@ const modelList: { [key in providersType]: string[] } = {
 		'gpt-3.5-turbo-0125',
 		'gpt-3.5-turbo',
 		'gpt-3.5-turbo-1106',
+		'chatgpt-4o-latest',
 	],
-	// TODO: add Anthropic
+	anthropic: [
+		'claude-3-7-sonnet-20250219',
+		'claude-3-5-sonnet-latest',
+		'claude-3-5-sonnet-20241022',
+		'claude-3-5-sonnet-20240620',
+		'claude-3-5-haiku-latest',
+		'claude-3-5-haiku-20241022',
+		'claude-3-opus-latest',
+		'claude-3-opus-20240229',
+		'claude-3-sonnet-20240229',
+		'claude-3-haiku-20240307',
+	],
 };
 
-function checkIsCancel(value: unknown) {
+function closeOnCancel(value: unknown) {
 	if (isCancel(value)) {
 		cancel('Operation cancelled.');
 		process.exit();
 	}
 }
-
-const INSERT_MANUAL_OPTION_VALUE = 'manual';
-
-const manualOption = {
-	value: INSERT_MANUAL_OPTION_VALUE,
-	label: 'Insert manually',
-};

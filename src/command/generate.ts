@@ -1,4 +1,5 @@
 import { platform } from 'node:os';
+import { type AnthropicProvider, createAnthropic } from '@ai-sdk/anthropic';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { createOpenAI } from '@ai-sdk/openai';
 import type { ProviderV1 } from '@ai-sdk/provider';
@@ -12,15 +13,19 @@ import {
 } from '../configuration.js';
 import { buildSystemPrompt } from '../prompt/system-prompt.js';
 
-type providerFactoryFunc = (apiKey: string) => ProviderV1;
-
-const providerFactoryMap: { [key in providersType]: providerFactoryFunc } = {
+const providerFactoryMap: {
+	[key in providersType]: (apikey: string) => ProviderV1 | AnthropicProvider;
+} = {
 	google: (apiKey: string) => createGoogleGenerativeAI({ apiKey }),
-	openAI: (apiKey: string) => createOpenAI({ apiKey }),
+	openai: (apiKey: string) => createOpenAI({ apiKey }),
+	//NOTE: AnthropicProvider not fully compatible with ProviderV1 type
+	anthropic: (apiKey: string) => createAnthropic({ apiKey }),
 };
 
-function buildLLM() {
-	const provider = providerFactoryMap[getAIProvider()]?.(getApiKey());
+function getLLM() {
+	const providerName = getAIProvider();
+	const apiKey = getApiKey();
+	const provider = providerFactoryMap[providerName]?.(apiKey);
 	return provider?.languageModel(getModel());
 }
 
@@ -43,7 +48,7 @@ const schema = z.object({
 
 export async function generateCommand(question: string | string[]) {
 	const prompt = Array.isArray(question) ? question.join(' ') : question;
-	const model = buildLLM();
+	const model = getLLM();
 	const system = buildSystemPrompt(process.env.SHELL || 'bash', getOS());
 
 	return generateObject({

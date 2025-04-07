@@ -15,6 +15,7 @@ const asyncExec = promisify(exec);
 const { values, positionals } = parseCmdArgs(process.argv.splice(2));
 
 // console.debug('parse args:', { values, positionals });
+console.log()
 
 if (values.help) {
 	console.log(showHelp());

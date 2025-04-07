@@ -1,8 +1,9 @@
 import { intro, log, outro } from '@clack/prompts';
 import { bgBlue, underline } from 'kleur/colors';
+import type { CommandOptions } from '../cli/commands.js';
 import { getConf } from '../configuration.js';
 
-export function showConf() {
+export function showConf(options?: CommandOptions) {
 	const logWithCondition = (
 		text: string | number | boolean,
 		label = '',
@@ -24,4 +25,8 @@ export function showConf() {
 		apikeyConfigured,
 	);
 	outro();
+
+	if (options?.exitOnComplete) {
+		process.exit();
+	}
 }

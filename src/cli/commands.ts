@@ -7,6 +7,11 @@ type Options = {
 	default?: boolean | string;
 };
 
+export type CommandOptions = {
+	/**The process ends after this command */
+	exitOnComplete?: boolean;
+};
+
 type optionsKeyType =
 	| 'init'
 	| 'verbose'
@@ -15,7 +20,7 @@ type optionsKeyType =
 	| 'exec'
 	| 'show-conf';
 
-const options: { [key in optionsKeyType]: Options } = {
+export const commandArgsConfig: { [key in optionsKeyType]: Options } = {
 	init: {
 		type: 'boolean',
 		default: false,
@@ -51,7 +56,7 @@ const options: { [key in optionsKeyType]: Options } = {
 export function parseCmdArgs(args: string[]) {
 	return parseArgs({
 		args,
-		options,
+		options: commandArgsConfig,
 		allowPositionals: true,
 		allowNegative: true,
 	});

@@ -50,20 +50,6 @@ export async function init() {
 	outro(bgBlue('Configure BashGenie: Completed'));
 }
 
-async function askForOwerwrite(
-	message: string,
-	cb: (overwrite: boolean) => Promise<boolean | void> = (o: boolean) =>
-		Promise.resolve(o),
-	initialValue = false,
-) {
-	const overwrite = await confirm({
-		message,
-		initialValue,
-	});
-	closeOnCancel(overwrite);
-	return await cb(overwrite as boolean);
-}
-
 async function askAPIKey() {
 	if (getApiKey()) {
 		const v = await askForOwerwrite(
@@ -136,6 +122,27 @@ async function selectModel() {
 	return { provider, model };
 }
 
+async function askForOwerwrite(
+	message: string,
+	cb: (overwrite: boolean) => Promise<boolean | void> = (o: boolean) =>
+		Promise.resolve(o),
+	initialValue = false,
+) {
+	const overwrite = await confirm({
+		message,
+		initialValue,
+	});
+	closeOnCancel(overwrite);
+	return await cb(overwrite as boolean);
+}
+
+function closeOnCancel(value: unknown) {
+	if (isCancel(value)) {
+		cancel('Operation cancelled.');
+		process.exit();
+	}
+}
+
 const modelList: { [key in providersType]: string[] } = {
 	google: [
 		'gemini-2.0-flash-001',
@@ -204,10 +211,3 @@ const modelList: { [key in providersType]: string[] } = {
 		'claude-3-haiku-20240307',
 	],
 };
-
-function closeOnCancel(value: unknown) {
-	if (isCancel(value)) {
-		cancel('Operation cancelled.');
-		process.exit();
-	}
-}

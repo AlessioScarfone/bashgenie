@@ -1,4 +1,6 @@
-export function showHelp() {
+import type { CommandOptions } from '../cli/commands.js';
+
+export function showHelp(options?: CommandOptions) {
 	const helpText = `This tool leverages AI to convert your natural language questions into precise CLI commands. 
     Simply ask a question, and let the AI generate the appropriate command for you. 
     Usage:
@@ -33,6 +35,12 @@ export function showHelp() {
     3. Running the configuration wizard:
     \`bashgenie --init\`
     `;
+
+	console.log(helpText);
+
+	if (options?.exitOnComplete) {
+		process.exit();
+	}
 
 	return helpText;
 }

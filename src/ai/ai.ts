@@ -11,7 +11,7 @@ import {
 	getModel,
 	type providersType,
 } from '../configuration.js';
-import { buildSystemPrompt } from '../prompt/system-prompt.js';
+import { buildSystemPrompt } from './system-prompt.js';
 
 const providerFactoryMap: {
 	[key in providersType]: (apikey: string) => ProviderV1 | AnthropicProvider;

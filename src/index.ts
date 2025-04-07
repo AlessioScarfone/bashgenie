@@ -8,6 +8,7 @@ import { parseCmdArgs } from './cli/parse-cmd-args.js';
 import { generateCommand } from './command/generate.js';
 import { showHelp } from './command/help.js';
 import { init } from './command/init.js';
+import { showConf } from './command/showConf.js';
 
 const asyncExec = promisify(exec);
 
@@ -22,6 +23,11 @@ if (values.help) {
 
 if (values.init) {
 	await init();
+}
+
+if (values['show-conf']) {
+	showConf();
+	process.exit();
 }
 
 intro(bgBlue('BashGenie: Start'));

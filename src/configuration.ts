@@ -1,6 +1,6 @@
 import Conf from 'conf';
 
-export type providersType = 'google' | 'openAI';
+export type providersType = 'google' | 'openai' | 'anthropic';
 
 const confSchema = {
 	model: {
@@ -28,4 +28,12 @@ export function getModel() {
 }
 export function getAIProvider() {
 	return conf.get('provider') as providersType;
+}
+
+export function getConf() {
+	return conf.store;
+}
+
+export function isConfAlreadyExist() {
+	return conf?.size > 0;
 }

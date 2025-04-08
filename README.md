@@ -12,7 +12,7 @@ Simply ask a question, and let BashGenie generate the perfect command for you!
   - [Table of Contents](#table-of-contents)
   - [Initial Setup](#initial-setup)
   - [Usage](#usage)
-  - [Caution \& Notes](#caution--notes)
+  - [Caution](#caution)
 
 ---
 
@@ -51,14 +51,13 @@ Run the setup wizard to configure the tool. Use this if you're a first-time user
 Prevent the tool from executing the generated command. It will only display the command and exit without asking for confirmation.
 
 
-## Caution & Notes
+## Caution
 
 > [!CAUTION]
-> Always review the generated command before executing it. While BashGenie aims to create safe and useful commands, it is important to ensure that they align with your specific use case.
-
-> [!NOTE]
-> No command will be executed directly. BashGenie always prompts for confirmation before executing any generated command, giving you a chance to review it before running it.
-> During command generation, an estimate of the command’s potential "*dangerousness*" will be provided. Commands identified as risky or potentially harmful will not prompt you for execution confirmation. 
+> <u>**Always carefully review the generated command before executing it.**</u> While BashGenie is designed to generate safe and useful commands, it's crucial to ensure that the output aligns with your specific needs and context.
+>
+> **No command will be executed automatically.** BashGenie will always prompt you for confirmation before running any generated command, allowing you to verify its accuracy and relevance. 
+> Additionally, during the command generation process, BashGenie will provide an estimate of the command's potential "**dangerousness**." Commands identified as risky or potentially harmful will not prompt you for confirmation and will be flagged accordingly. 
 
 <!-- # Resources
 Additional and learning resources:

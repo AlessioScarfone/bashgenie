@@ -6,17 +6,18 @@ import { init } from './command/init.js';
 import { run } from './command/run.js';
 import { showConf } from './command/show-conf.js';
 
-const { values, positionals: question } = parseCmdArgs(process.argv.splice(2));
+const { values: flags, positionals: question } = parseCmdArgs(
+	process.argv.splice(2),
+);
 
 // console.debug('parse args:', { values, positionals });
-console.log();
-
-if (values.help) showHelp({ exitOnComplete: true });
-if (values['show-conf']) showConf({ exitOnComplete: true });
-if (values.init) await init();
+if (flags.help) showHelp({ exitOnComplete: true });
+if (flags['show-conf']) showConf({ exitOnComplete: true });
+if (flags.init) await init({ exitOnComplete: true });
 
 await run(question, {
-	explain: Boolean(values.explain),
-	verbose: Boolean(values.verbose),
-	exec: Boolean(values.exec),
+	explain: Boolean(flags.explain),
+	verbose: Boolean(flags.verbose),
+	exec: Boolean(flags.exec),
+	minimal: Boolean(flags.minimal),
 });

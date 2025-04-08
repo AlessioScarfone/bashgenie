@@ -17,6 +17,7 @@ type optionsKeyType =
 	| 'verbose'
 	| 'explain'
 	| 'help'
+	| 'minimal'
 	| 'exec'
 	| 'show-conf';
 
@@ -41,6 +42,11 @@ export const commandArgsConfig: { [key in optionsKeyType]: Options } = {
 		type: 'boolean',
 		default: false,
 		short: 'h',
+	},
+	minimal: {
+		type: 'boolean',
+		default: false,
+		short: 'm',
 	},
 	exec: {
 		type: 'boolean',

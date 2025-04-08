@@ -9,6 +9,7 @@ import {
 	text,
 } from '@clack/prompts';
 import { bgBlue } from 'kleur/colors';
+import type { CommandOptions } from '../cli/commands.js';
 import {
 	conf,
 	getAIProvider,
@@ -24,7 +25,7 @@ import {
  * The configuration file is placed in the user's configuration directory:
  * https://github.com/sindresorhus/env-paths#pathsconfig
  */
-export async function init() {
+export async function init(options?: CommandOptions) {
 	//encryptionKey: this is not intended for security purposes, it's main use is for obscurity
 	intro(bgBlue('Configure BashGenie: Start'));
 	if (isConfAlreadyExist()) {
@@ -48,6 +49,10 @@ export async function init() {
 	conf.set('model', model);
 	conf.set('provider', provider);
 	outro(bgBlue('Configure BashGenie: Completed'));
+
+	if (options?.exitOnComplete) {
+		process.exit();
+	}
 }
 
 async function askAPIKey() {

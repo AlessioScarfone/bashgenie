@@ -7,8 +7,14 @@ export function showHelp(options?: CommandOptions) {
     \`bashgenie [OPTIONS] <YOUR QUESTION>\`
 
     Options:
-    -h, --help  
-        Show this help message and exit.
+    --init  
+        Run the configuration wizard to set up the tool with your preferences. Useful for first-time users or when you want to adjust settings.
+
+    -c, --show-conf
+        Show current configuration.
+
+    -m, --minimal
+        Output only the generated command, ignoring the \`-v\` and \`-e\` flags.
 
     -e, --explain  
         Explain the generated command. This will provide a detailed breakdown of the command components and why they were selected.
@@ -16,14 +22,12 @@ export function showHelp(options?: CommandOptions) {
     -v, --verbose  
         Show additional information, such as token usage, to help understand the internal workings of the tool.
     
-    -c, --show-conf
-        Show current configuration.
-
-    --init  
-        Run the configuration wizard to set up the tool with your preferences. Useful for first-time users or when you want to adjust settings.
-    
     --no-exec
         Do not ask to run the generate command and exit after printing the generation result
+    
+    -h, --help  
+        Show this help message and exit.
+    
 
     Example Usage:
     1. Basic command generation:

@@ -1,10 +1,25 @@
 # BashGenie
 
-BashGenie is a command-line tool that leverages AI to convert your natural language questions into precise CLI commands. Simply ask a question, and let the AI generate the appropriate command for you.
+**BashGenie** is a command-line tool powered by AI that translates your natural language questions into accurate and efficient CLI commands. 
+Simply ask a question, and let BashGenie generate the perfect command for you!
+
+> **Inspired by** [yolo-ai-cmdbot](https://github.com/wunderwuzzi23/yolo-ai-cmdbot)
 
 ![banner](./assets/banner.png)
 
-## Initial configuration
+## Table of Contents
+- [BashGenie](#bashgenie)
+  - [Table of Contents](#table-of-contents)
+  - [Initial Setup](#initial-setup)
+  - [Usage](#usage)
+  - [Caution \& Notes](#caution--notes)
+
+---
+
+## Initial Setup
+
+Before using BashGenie, you'll need to run the configuration wizard to set it up. Use the following command to initialize:
+
 ```sh
 bashgenie --init
 ```
@@ -21,33 +36,32 @@ bashgenie [OPTIONS] <YOUR QUESTION>
 Show this help message and exit.
 
 `-e, --explain`
-Explain the generated command. This will provide a detailed breakdown of the command components and why they were selected.
+Provide a detailed explanation of the generated command, including a breakdown of each component and why it was selected.
 
 `-v, --verbose`
-Show additional information, such as token usage, to help understand the internal workings of the tool.
+Display additional information (e.g., token usage) for a deeper understanding of the tool’s internal workings.
 
 `-c, --show-conf`
-Show current configuration.
+Show the current configuration settings.
 
 `--init`
-Run the configuration wizard to set up the tool. Useful for first-time users or when you want to adjust settings.
+Run the setup wizard to configure the tool. Use this if you're a first-time user or need to adjust your settings.
 
 `--no-exec`
-Do not ask to run the generate command and exit after printing the generation result
+Prevent the tool from executing the generated command. It will only display the command and exit without asking for confirmation.
 
 
-# Feature
+## Caution & Notes
 
-- [X] generate command from question
-- [X] `init` command
-- [X] `explain` command
-- [X] `verbose` command (used token)
-- [X] `help` command
-- [X] `exec` command (ask user confirmation)
-- [ ] use `spawn` to run command and stream the output
+> [!CAUTION]
+> Always review the generated command before executing it. While BashGenie aims to create safe and useful commands, it is important to ensure that they align with your specific use case.
 
-# Resources
+> [!NOTE]
+> No command will be executed directly. BashGenie always prompts for confirmation before executing any generated command, giving you a chance to review it before running it.
+> During command generation, an estimate of the command’s potential "*dangerousness*" will be provided. Commands identified as risky or potentially harmful will not prompt you for execution confirmation. 
 
-- https://hackernoon.com/publishing-a-nodejs-cli-tool-to-npm-in-less-than-15-minutes
+<!-- # Resources
+Additional and learning resources:
 - https://www.totaltypescript.com/how-to-create-an-npm-package
-- https://blog.logrocket.com/building-typescript-cli-node-js-commander/#making-cli-globally-accessible
+- https://hackernoon.com/publishing-a-nodejs-cli-tool-to-npm-in-less-than-15-minutes
+- https://blog.logrocket.com/building-typescript-cli-node-js-commander/#making-cli-globally-accessible -->

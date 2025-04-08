@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseCmdArgs } from './commands.js';
+import { parseCmdArgs } from '../src/cli/commands.js';
 
 describe('parseCmdArgs', () => {
 	it('--init', () => {

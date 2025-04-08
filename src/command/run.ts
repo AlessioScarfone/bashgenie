@@ -5,6 +5,8 @@ import type { LanguageModelUsage } from 'ai';
 import { bgBlue, bgRed, bgYellow } from 'kleur/colors';
 import { type AIObjectSchema, generateCommand } from '../ai/ai.js';
 
+export const asyncExec = promisify(exec);
+
 export type RunOptions = {
 	explain: boolean;
 	verbose: boolean;
@@ -48,7 +50,6 @@ export async function run(
 async function runCommand(command: string) {
 	// TODO: Replace with spawn and streaming the output
 	try {
-		const asyncExec = promisify(exec);
 		const result = await asyncExec(`${command}`);
 		console.log(`${result.stdout}`);
 		console.error(`${result.stderr}`);

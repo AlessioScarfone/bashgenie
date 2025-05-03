@@ -10,6 +10,7 @@ Simply ask a question, and let BashGenie generate the perfect command for you!
 ## Table of Contents
 - [BashGenie](#bashgenie)
   - [Table of Contents](#table-of-contents)
+  - [Installing from source code](#installing-from-source-code)
   - [Initial Setup](#initial-setup)
   - [Usage](#usage)
   - [Caution](#caution)

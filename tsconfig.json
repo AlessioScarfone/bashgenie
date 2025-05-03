@@ -1,7 +1,8 @@
 {
-	"include": ["src", "test"],
-	"exclude": ["node_modules", "dist", "src/**/*.test.ts"],
+	"include": ["src"],
+	"exclude": ["node_modules", "dist", "test"],
 	"compilerOptions": {
+		"rootDir": "src",
 		/* Base Options: */
 		"esModuleInterop": true,
 		"skipLibCheck": true,
@@ -11,7 +12,7 @@
 		"moduleDetection": "force",
 		"isolatedModules": true,
 		"verbatimModuleSyntax": true,
-		"erasableSyntaxOnly": true,
+		// "erasableSyntaxOnly": true,
 		/* Strictness */
 		"strict": true,
 		"noUncheckedIndexedAccess": true,

@@ -59,8 +59,8 @@ export type AIObjectSchema = z.infer<typeof schema>;
 export async function generateCommand(question: string | string[]) {
 	const prompt = Array.isArray(question) ? question.join(' ') : question;
 	const model = getLLM();
-	if(!model) {
-		throw new Error("Available LLM not found")
+	if (!model) {
+		throw new Error('Available LLM not found');
 	}
 	const system = buildSystemPrompt(process.env.SHELL || 'bash', getOS());
 

@@ -16,6 +16,14 @@ Simply ask a question, and let BashGenie generate the perfect command for you!
 
 ---
 
+## Installing from source code
+
+```sh
+nvm use
+npm run build
+npm i -g .
+```
+
 ## Initial Setup
 
 Before using BashGenie, you'll need to run the configuration wizard to set it up. Use the following command to initialize:
